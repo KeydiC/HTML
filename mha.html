@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hero Academia</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background: url('https://wallpaperaccess.com/full/840653.jpg') center center/cover no-repeat;
+            color: #dfc900;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            height: 120px;
+        }
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            padding-top: 20px;
+        }
+        nav {
+            background-color: #cc0000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: #003366;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            background: #ffcc00;
+            color: #003366;
+            transform: scale(1.1);
+        }
+        .hero-image {
+            background: url('https://wallpapercave.com/wp/wp1894650.jpg') center center/cover no-repeat;
+            height: 300px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-text {
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .section h2 {
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .back-to-top {
+            background-color: #ffcc00;
+            color: #003366;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            background-color: #ff9900;
+        }
+        .content {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        .content:hover {
+            transform: translateY(-5px);
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #003366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #ffcc00;
+            color: #003366;
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .character-card {
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        .character-card img {
+            width: 100%;
+            height: auto;
+        }
+        .character-card h3 {
+            margin: 0;
+            padding: 10px 0;
+            background-color: #ffcc00;
+            color: #003366;
+            font-size: 1.2em;
+        }
+        .character-card p {
+            padding: 10px;
+            margin: 0;
+            color: #666;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="https://www.pngmart.com/files/13/My-Hero-Academia-Logo-Transparent-Background.png" alt="My Hero Academia Logo">
+        <h1>My Hero Academia</h1>
+        <p>Descubre el mundo de los héroes y villanos</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="javascript:void(0)" onclick="showSection('sinopsis')">Sinopsis</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('personajes')">Personajes</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('temas')">Temas</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('academia')">Academia U.A.</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('allmight')">All Might</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('villanos')">Villanos</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('arcos')">Arcos</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('anime')">Anime</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('manga')">Manga</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('merchandising')">Mercancia</a></li>
+        </ul>
+    </nav>
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1>¡PLUS ULTRAAAAAAAAAAAAAAAAAAAAA!</h1>
+            <p>Un viaje para convertirse en el héroe número uno</p>
+        </div>
+    </div>
+
+    <div id="sinopsis" class="content active">
+        <h2>Sinopsis</h2>
+        <p>"My Hero Academia" es una serie de manga y anime creada por Kōhei Horikoshi que se desarrolla en un mundo donde aproximadamente el 80% de la población mundial posee habilidades especiales llamadas "Quirks". Estos poderes pueden variar desde habilidades extraordinarias hasta características físicas inusuales. En este universo, los superhéroes y supervillanos son una parte integral de la sociedad.
+            La historia sigue a Izuku Midoriya, un joven estudiante que sueña con convertirse en el héroe más grande del mundo a pesar de haber nacido sin un Quirk. Desde niño, Izuku idolatra a All Might, el héroe número uno y símbolo de la paz, y estudia con devoción todo lo relacionado con los héroes y sus habilidades.
+        </p>
+            La vida de Izuku da un giro inesperado cuando un día, a pesar de no tener poderes, se lanza valientemente a salvar a su compañero de clase Katsuki Bakugo de un villano. Este acto de valentía atrae la atención de All Might, quien decide compartir con Izuku su propio Quirk, "One For All". Este poder es único ya que puede ser transferido de una persona a otra y otorga una fuerza inmensa acumulada a lo largo de generaciones.
+        <p>
+            Con su nuevo Quirk, Izuku se inscribe en la Academia U.A., la escuela más prestigiosa para jóvenes héroes en formación. Allí, junto a otros aspirantes a héroe, enfrenta un riguroso entrenamiento y desafíos constantes. La academia está dirigida por algunos de los héroes más experimentados y poderosos, como el severo pero justo Eraser Head y la energética Present Mic.
+        </p>
+            Durante su tiempo en la Academia U.A., Izuku y sus compañeros de clase, la Clase 1-A, se enfrentan a diversas pruebas, torneos y ejercicios prácticos que ponen a prueba sus habilidades y determinación. Además, deben lidiar con la amenaza constante de la Liga de Villanos, un grupo de criminales liderado por el siniestro Tomura Shigaraki, cuyo objetivo es destruir la sociedad de héroes.
+        <p> 
+            A lo largo de la serie, cada estudiante de la Clase 1-A, como el explosivo Katsuki Bakugo, la ingeniosa Ochaco Uraraka, el veloz Tenya Iida, y muchos otros, desarrollan sus habilidades y enfrentan sus propios desafíos personales. La narrativa también se expande para incluir a otros héroes profesionales, como el ardiente Endeavor, quien lucha por superar la sombra de All Might y ser un mejor padre y héroe.
+        </p> 
+            "My Hero Academia" no solo se enfoca en las batallas y la acción, sino también en temas profundos como el sacrificio, la amistad, el trabajo en equipo, y la lucha por superar las adversidades. Cada arco de la historia introduce nuevos villanos, revela secretos sobre los Quirks, y expande el universo de los héroes, manteniendo a los espectadores y lectores al borde de sus asientos.
+        <p>
+            La serie ha sido aclamada por su desarrollo de personajes, su construcción de mundo y su capacidad para mezclar momentos emocionales y dramáticos con secuencias de acción impresionantes. Con cada episodio y capítulo, "My Hero Academia" continúa explorando el significado de ser un verdadero héroe en un mundo donde el poder puede corromper, pero también inspirar a la grandeza.
+            
+            </p>
+        <img src="https://www.whats-on-netflix.com/wp-content/uploads/2021/06/my-hero-academia-season-1-netflix.jpg" alt="My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="personajes" class="content">
+        <h2>Personajes</h2>
+        <div class="character-grid">
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/33/19/a7/3319a795dc06e9c21ca54397c551223d.jpg" alt="Izuku Midoriya">
+                <h3>Izuku Midoriya (Deku)</h3>
+                <p>Quirk: One For All</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/cd/b3/02/cdb30237bdc719594381f7ae2097ce11.jpg" alt="Katsuki Bakugo">
+                <h3>Katsuki Bakugo</h3>
+                <p>Quirk: Explosion</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/bc/11/2d/bc112d0d40ae27554994707d48cf4f02.jpg" alt="Ochaco Uraraka">
+                <h3>Ochaco Uraraka</h3>
+                <p>Quirk: Zero Gravity</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/fe/1d/ae/fe1dae1ecaf4742940c00801f426b839.jpg" alt="Ochaco Uraraka">
+                <h3>Tsuyu Asui</h3>
+                <p>Quirk: Rana</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/28/8a/93/288a93aab3dc88a4dbd052d5842893dc.png" alt="Ochaco Uraraka">
+                <h3>Shoto Todoroki</h3>
+                <p>Quirk: Medio frio medio caliente</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/b9/e6/3a/b9e63a273e35a230f4588d521eb746f4.jpg" alt="Ochaco Uraraka">
+                <h3>Eijiro Kirishima</h3>
+                <p>Quirk: Endurecimiento</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/6c/2e/65/6c2e65d84306892521de7bd3fd27c778.jpg" alt="Ochaco Uraraka">
+                <h3>Fumikage Tokoyami</h3>
+                <p>Quirk: Dark Shadow</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/61/2e/8c/612e8cc9d2c2c5af79f29494746b308f.jpg" alt="Ochaco Uraraka">
+                <h3>Momo Yaoyorozu</h3>
+                <p>Quirk: Creacion</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/8b/b5/35/8bb535a47f627a10f999620bc43be7d5.jpg" alt="Ochaco Uraraka">
+                <h3>Mina Ashido</h3>
+                <p>Quirk: Acido</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/18/70/e6/1870e6b289168eaeb6e48494d8184e57.jpg" alt="Ochaco Uraraka">
+                <h3>Denki Kaminari</h3>
+                <p>Quirk: Electricidad</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/c5/e5/fb/c5e5fb009ee0864e9fe2123bfe43541b.jpg" alt="Ochaco Uraraka">
+                <h3>Kyoka Jiro</h3>
+                <p>Quirk: Earphone Jack</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/6e/4d/4f/6e4d4f02bebba45aae5d38f890d71148.jpg" alt="Ochaco Uraraka">
+                <h3>Toru Hagakure</h3>
+                <p>Quirk: inivisibilidad</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/cb/74/b7/cb74b7d59792654326817cff116055ed.jpg" alt="Ochaco Uraraka">
+                <h3>Tenya Iida</h3>
+                <p>Quirk: motor</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/5b/42/52/5b4252b6e32682129f69363112b193cc.jpg" alt="Ochaco Uraraka">
+                <h3>Hanta Sero</h3>
+                <p>Quirk: Cinta</p>
+            </div>
+            <div class="character-card">
+                <img src="https://d.wattpad.com/story_parts/845144602/images/15f8aeadeb886ce723156930340.jpg" alt="Ochaco Uraraka">
+                <h3>Minoru Mineta</h3>
+                <p>Quirk: Desprender</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/ac/fe/4f/acfe4fecb3e2ddaf38ee6c48dc0f3d60.jpg" alt="Ochaco Uraraka">
+                <h3>Mashirao Ojiro</h3>
+                <p>Quirk: cola</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/de/40/a3/de40a3c6abd68b0b234e0c996bed5363.jpg" alt="Ochaco Uraraka">
+                <h3>Yuga Aoyama</h3>
+                <p>Quirk: ombligo laser</p>
+            </div>
+            <div class="character-card">
+                <img src="https://i.pinimg.com/originals/30/5d/15/305d15763a58d26d413bd73e7a8d196d.jpg" alt="Ochaco Uraraka">
+                <h3>Mezo Shoji</h3>
+                <p>Quirk: Tentaculos</p>
+            </div>
+        </div>
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="temas" class="content">
+        <h2>Temas</h2>
+        <p>Heroísmo y Sacrificio:
+            La serie investiga lo que significa ser un héroe, tanto en términos de poder como de moralidad. Los personajes deben enfrentar situaciones donde tienen que poner en riesgo sus vidas y hacer sacrificios personales para proteger a los demás.
+            El lema "Plus Ultra", que significa ir más allá, resalta la importancia de superar los propios límites por el bien común.
+            Diferencias y Discriminación:
+        </p>
+            La presencia de Quirks (poderes especiales) y cómo afectan la vida de las personas ilustra la diversidad y las diferencias entre individuos. Algunos personajes son discriminados por sus Quirks o por la falta de ellos, lo que refleja cuestiones sociales sobre la aceptación y la igualdad.
+            Crecimiento Personal y Desarrollo:
+            La serie sigue el crecimiento y desarrollo de Izuku Midoriya y sus compañeros de clase. Enfrentan desafíos que les permiten crecer tanto como héroes como personas.
+            Se enfatiza la importancia del esfuerzo y la perseverancia, mostrando que el trabajo duro puede superar las limitaciones naturales.
+            Mentoría y Legado:
+        <p>
+            Las relaciones entre maestros y estudiantes, especialmente la de All Might e Izuku, destacan cómo los mentores pueden influir profundamente en el desarrollo de sus protegidos.
+            La transferencia de poder y la importancia del legado son recurrentes, reflejando cómo las generaciones anteriores impactan a las futuras.
+            Moralidad y Justicia:
+            La serie examina qué significa realmente la justicia y cómo puede ser interpretada de diferentes maneras. Los villanos a menudo tienen motivaciones que cuestionan el sistema actual de héroes y la estructura de la sociedad.
+            Los personajes deben enfrentarse a dilemas morales donde las líneas entre el bien y el mal no siempre son claras.
+            Identidad y Autenticidad:
+        </p>
+    <p> Muchos personajes luchan con su identidad, tanto en términos de sus Quirks como de sus roles en la sociedad. La serie explora cómo se definen a sí mismos y cómo se sienten auténticos en su papel como héroes.
+            La presión de la sociedad y las expectativas externas juegan un papel crucial en cómo los personajes ven su propia identidad.
+            Amistad y Trabajo en Equipo:
+            La dinámica de grupo y la importancia de la colaboración son fundamentales. Los personajes deben aprender a trabajar juntos, apoyarse mutuamente y superar los conflictos personales para alcanzar metas comunes.
+            La camaradería y las relaciones interpersonales son esenciales para su éxito y desarrollo.
+            Responsabilidad y Poder:
+            
+            La frase "Con gran poder viene una gran responsabilidad" es un tema central. Los personajes deben aprender a manejar sus habilidades de manera responsable y entender las consecuencias de sus acciones.</p>
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="academia" class="content">
+        <h2>Academia U.A.</h2>
+        <p>
+            La Academia UA (U.A. High School) es una de las instituciones centrales en el mundo de "My Hero Academia".
+Fundación y Propósito
+Fundación: La UA es la academia más prestigiosa para la formación de héroes en Japón. Fue establecida con el propósito de entrenar a la próxima generación de héroes profesionales.
+Propósito: Proveer educación de calidad y entrenamiento especializado para estudiantes con Quirks, preparándolos para enfrentar las amenazas y mantener la paz en la sociedad.
+</p>
+<p>
+Facultades y Cursos
+Facultad de Héroes: El curso más destacado y competitivo. Los estudiantes aprenden habilidades de combate, rescate y tácticas de enfrentamiento a villanos.
+Facultad General: Para estudiantes que no pudieron entrar en la Facultad de Héroes. Ofrece educación general pero puede transferirse al curso de héroes si demuestran habilidades excepcionales.
+Facultad de Soporte: Los estudiantes aquí desarrollan gadgets y tecnología de soporte para héroes.
+Facultad de Negocios: Enfocada en la administración y gestión de agencias de héroes y otros aspectos comerciales de la industria de héroes.
+</p>
+<p>
+Estructura y Funcionamiento
+Entrenamiento Intensivo: Los estudiantes pasan por un riguroso entrenamiento físico y mental, incluyendo simulaciones de rescate y combate, exámenes prácticos y eventos deportivos.
+Uniformes y Equipamiento: Cada estudiante tiene un uniforme estándar, pero también pueden tener trajes personalizados diseñados en la Facultad de Soporte.
+Exámenes y Evaluaciones: Incluyen pruebas teóricas, prácticas, festivales deportivos y el famoso "Examen de Licencia Provisional de Héroe".
+</p>
+<p>
+Instalaciones
+Campus Moderno: Equipado con instalaciones de alta tecnología para entrenamiento, incluyendo el "Field Gamma" y el "Ground Beta" donde los estudiantes practican combates reales.
+Dormitorios: Para fomentar el compañerismo y la seguridad, muchos estudiantes viven en los dormitorios de la UA.
+Salón de Clases y Laboratorios: Diseñados para proveer educación tanto teórica como práctica.
+</p>
+<p>
+Personal Destacado
+All Might (Toshinori Yagi): Símbolo de la paz y el héroe más fuerte, antes de su retiro enseñaba en UA como mentor principal.
+Aizawa Shota (Eraser Head): Profesor de la Clase 1-A, conocido por su estricta pero justa forma de enseñar.
+Cementoss, Midnight, Present Mic, entre otros: Héroes profesionales que también son profesores y entrenadores en la UA.
+Clases y Estudiantes Notables
+Clase 1-A: La clase más destacada y donde se centra gran parte de la historia. Incluye personajes principales como Izuku Midoriya, Katsuki Bakugo, Ochaco Uraraka, Shoto Todoroki, entre otros.
+Clase 1-B: Otra clase de héroes en entrenamiento, rivales amistosos de la Clase 1-A, también muestran gran talento y potencial.
+</p>
+<p>Eventos Clave
+Festival Deportivo: Un evento anual donde los estudiantes compiten en una serie de desafíos para mostrar sus habilidades a los héroes profesionales.
+Viajes de Entrenamiento: Incluyen campamentos de entrenamiento intensivo para mejorar las habilidades de los estudiantes.
+Asaltos y Ataques: La UA ha sido objetivo de varios ataques por parte de villanos, incluyendo la Liga de Villanos, lo que lleva a medidas de seguridad adicionales.
+</p>
+<p>
+Contribución a la Sociedad
+La UA no solo forma héroes, sino que también realiza investigaciones y desarrolla tecnología para mejorar la seguridad y eficiencia en la lucha contra el crimen.
+La relación de la academia con las agencias de héroes y el gobierno es crucial para la estructura y el funcionamiento del sistema de héroes en Japón.
+En resumen, la Academia UA es mucho más que una escuela; es una institución fundamental en el mundo de "My Hero Academia", simbolizando la esperanza, la formación y el futuro de los héroes en la sociedad.
+        </p>
+        <img src="https://static.planetminecraft.com/files/resource_media/screenshot/13176154_lrg.png" alt="Academia U.A.">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="allmight" class="content">
+        <h2>All Might</h2>
+        <p>All Might, cuyo nombre real es Toshinori Yagi, es uno de los personajes más icónicos y centrales en "My Hero Academia". Su influencia en la serie es inmensa, no solo como el héroe más poderoso y el símbolo de la paz, sino también como mentor y modelo a seguir para la nueva generación de héroes. Aquí tienes una exploración detallada de All Might:
+        </p>
+    <p>  Origen y Pasado
+            Nacimiento y Juventud: Nacido sin un Quirk, Toshinori Yagi creció en un mundo donde tener habilidades especiales era la norma. Desde joven, mostró un fuerte sentido de justicia y un deseo inquebrantable de ayudar a los demás.
+            Entrenamiento: Fue entrenado por Nana Shimura, la séptima portadora del Quirk "One For All". Shimura se convirtió en su mentora y figura materna, enseñándole no solo a utilizar su poder, sino también a entender el verdadero significado del heroísmo.
+            Herencia del One For All: Después de la trágica muerte de Shimura a manos del villano All For One, Toshinori heredó el One For All, un Quirk que se transfiere de un usuario a otro, acumulando poder con cada transferencia. Este poder le otorgó una fuerza y velocidad sobrehumanas, así como una inmensa resistencia.
+        </p>
+            Carrera como Héroe
+            Símbolo de la Paz: All Might se convirtió en el héroe más famoso y admirado del mundo, conocido por su carisma, poder inigualable y su inquebrantable sonrisa. Fue fundamental en la disminución de la criminalidad y se convirtió en un símbolo de esperanza y justicia.
+            Enfrentamientos con All For One: A lo largo de su carrera, All Might tuvo varios enfrentamientos con su némesis, All For One. Su batalla más significativa resultó en una herida grave que limitó su capacidad para mantener su forma heroica por largos periodos de tiempo.
+        </p><p> Relación con Izuku Midoriya
+            Encuentro con Midoriya: La vida de All Might cambió cuando conoció a Izuku Midoriya, un joven sin Quirk pero con un fuerte deseo de convertirse en un héroe. Impresionado por el valor y el espíritu de Midoriya, All Might decidió pasarle el One For All.
+            Mentoría: All Might se convirtió en el mentor de Midoriya, guiándolo en el uso de su nuevo Quirk y enseñándole lo que significa ser un verdadero héroe. Esta relación se convierte en el núcleo emocional de la serie, mostrando el crecimiento de ambos personajes a través de su vínculo.
+        </p>
+            Transición y Retiro
+            Batalla Final con All For One: En una batalla culminante contra All For One, All Might utiliza todo el poder restante del One For All para derrotar a su enemigo. Esta batalla, aunque victoriosa, marca el fin de su carrera como héroe activo.
+            Retiro: Después de su última pelea, All Might se retira oficialmente, asumiendo el papel de profesor en la Academia UA. Continúa apoyando y guiando a Midoriya y a otros estudiantes, preparándolos para ser la próxima generación de héroes.
+        <p>
+            Impacto y Legado
+            Inspiración Global: All Might no solo es un símbolo en Japón, sino que su influencia se extiende a nivel mundial. Muchos héroes jóvenes aspiran a seguir sus pasos, y su legado de esperanza y justicia continúa motivando a millones.
+            Rol en la UA: Como profesor, All Might desempeña un papel crucial en la formación de los estudiantes. Sus lecciones y experiencia son invaluables, y su presencia en la academia es un constante recordatorio del sacrificio y dedicación que requiere ser un héroe.
+            Simbolismo de la Paz: Incluso después de su retiro, All Might sigue siendo un faro de esperanza y un símbolo de paz. Su figura es venerada y respetada, y su historia de sacrificio y lucha contra el mal es un ejemplo eterno para todos.
+        </p>
+    <p> Personalidad y Características
+            Carisma y Positividad: All Might es conocido por su carismática personalidad y su constante sonrisa, diseñada para inspirar y calmar a quienes lo rodean. Esta actitud positiva es parte de lo que lo convierte en un símbolo tan poderoso.
+            Valor y Determinación: Su inquebrantable valentía y determinación lo han llevado a superar innumerables desafíos, enfrentando el peligro sin vacilar para proteger a los inocentes.
+            Humildad y Humanidad: A pesar de su inmenso poder, All Might es humilde y consciente de sus propias limitaciones y errores. Este aspecto de su carácter es particularmente evidente en su relación con Midoriya, a quien trata con paciencia y comprensión.
+        </p>
+        <p> Filosofía y Creencias
+            Símbolo de Esperanza: All Might cree firmemente en ser un símbolo de esperanza para los demás. Considera que su deber principal es inspirar a la gente a creer en un futuro mejor.
+            Responsabilidad del Poder: Con gran poder viene una gran responsabilidad. All Might encarna este principio, utilizando su fuerza no para beneficio personal, sino para proteger y servir a los demás.
+        </p>
+    <p> Debilidades y Conflictos Internos
+            Heridas Físicas: La batalla con All For One dejó a All Might con heridas graves que limitan severamente su tiempo en su forma heroica. Este deterioro físico es una constante lucha interna para él, dado su deseo de seguir protegiendo a la gente.
+            Transición de Poder: El proceso de transferir el One For All a Midoriya y la aceptación de su propio retiro han sido desafíos emocionales para All Might, enfrentando la realidad de su mortalidad y la necesidad de confiar en la próxima generación.
+            En resumen, All Might es un personaje multifacético cuyo impacto en "My Hero Academia" es profundo y duradero. Su evolución de un héroe invencible a un mentor sabio y vulnerable agrega una profundidad emocional significativa a la serie, destacando temas de sacrificio, legado y el verdadero significado del heroísmo.
+            </p>
+        <img src="https://wallpapercave.com/wp/wp7546247.jpg" alt="All Might">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>S
+    </div>
+
+    <div id="villanos" class="content">
+        <h2>Villanos</h2>
+        <p>La Liga de Villanos (League of Villains) es una de las principales organizaciones antagonistas en "My Hero Academia". A lo largo de la serie, la Liga experimenta una evolución significativa, pasando de ser un grupo pequeño y desorganizado a convertirse en una fuerza formidable que desafía el orden establecido. Aquí tienes un análisis detallado de la Liga de Villanos y su evolución:
+        </p>
+    <p>Fundación y Orígenes
+            Fundador: La Liga de Villanos es fundada por Tomura Shigaraki, cuyo verdadero nombre es Tenko Shimura. Es el nieto de Nana Shimura, la mentora de All Might, y su odio hacia los héroes está profundamente arraigado en su traumático pasado.
+            Mentor: All For One, uno de los villanos más poderosos y antiguos, es el mentor y benefactor de Shigaraki. Le proporciona recursos, orientación y el objetivo de destruir el símbolo de la paz, All Might.
+            Primera Aparición y Objetivos Iniciales
+            Ataque a la UA: La Liga de Villanos hace su primera aparición significativa durante el ataque a la USJ (Unforeseen Simulation Joint) en la Academia UA. Su objetivo es eliminar a All Might y sembrar caos.
+            Miembros Iniciales: Al comienzo, la Liga cuenta con un número reducido de miembros, incluyendo a Kurogiri, Nomu, y varios villanos menores. Shigaraki y Kurogiri son los líderes principales en esta etapa.
+        </p> 
+    <p>   Reclutamiento y Expansión
+            Atracción de Nuevos Miembros: Tras la fallida operación en la USJ, la Liga comienza a reclutar nuevos miembros, atraídos por la promesa de destruir el statu quo heroico. Entre los reclutas más destacados se encuentran Dabi, Himiko Toga, Spinner, y Twice.
+            Vanguard Action Squad: La Liga organiza la Vanguard Action Squad, un grupo de élite dentro de la Liga que lleva a cabo operaciones de alto impacto, como el secuestro de Katsuki Bakugo.
+            Colaboración con Overhaul y Conflictos Internos
+            Alianza Temporal con Overhaul: La Liga de Villanos se alía temporalmente con el Shie Hassaikai, un grupo yakuza liderado por Overhaul (Kai Chisaki). Esta alianza está marcada por tensiones y traiciones, culminando en la muerte de miembros de la Liga y la caída de Overhaul.
+            Desconfianza y Traición: Las relaciones dentro de la Liga son complicadas. Twice y Toga, por ejemplo, desarrollan lealtades fuertes entre sí y hacia Shigaraki, pero la confianza en otros miembros y en aliados temporales es siempre precaria.
+        </p>
+    <p>  Renovación y Fortalecimiento
+            Poder de Shigaraki: Con la caída de All For One, Shigaraki asume un rol más central y decisivo en la Liga. Su poder y control aumentan, y se revela más sobre su pasado y sus motivaciones.
+            Reclutamiento de Gigantomachia: Uno de los momentos clave en la evolución de la Liga es el reclutamiento de Gigantomachia, un seguidor leal de All For One con un poder abrumador. Esto fortalece significativamente a la Liga.
+            Transformación de Shigaraki: A través de un proceso doloroso y brutal, Shigaraki es mejorado quirúrgicamente por el Doctor Ujiko, ganando un poder comparable al de All For One.
+        </p>
+    <p>  Fusión y Transformación en el Frente de Liberación Paranormal
+            Fusión con el Ejército de Liberación: La Liga de Villanos se enfrenta y posteriormente se fusiona con el Ejército de Liberación Meta, liderado por Re-Destro. Esta fusión da lugar al Frente de Liberación Paranormal, una organización mucho más grande y poderosa.
+            Objetivos Ampliados: Con esta nueva estructura, el objetivo de la organización se expande para incluir la destrucción del sistema heroico y la creación de una sociedad donde las personas puedan usar sus Quirks libremente sin restricciones.
+        </p>
+    <p> Conflictos y Enfrentamientos Claves
+            Batallas Contra Héroes: La Liga de Villanos participa en múltiples enfrentamientos con héroes, incluyendo la incursión en la Academia UA, el asalto a Overhaul, y las batallas en la ciudad de Deika.
+            Guerra Paranormal: El Frente de Liberación Paranormal lanza una ofensiva masiva contra la Comisión de Seguridad de Héroes y los Pro-Héroes, resultando en batallas devastadoras y cambios significativos en la estructura del mundo de los héroes.
+        </p>
+    <p> Impacto y Legado
+            Desafío al Orden Establecido: La Liga de Villanos, a través de sus acciones y crecimiento, representa un desafío significativo al orden establecido y cuestiona la eficacia y moralidad del sistema heroico actual.
+            Evolución de Shigaraki: La evolución de Shigaraki de un villano impulsivo y destructivo a un líder carismático y poderoso es central en la trama, mostrando su desarrollo tanto en poder como en estrategia.
+        </p><p> Miembros Destacados y sus Roles
+            Tomura Shigaraki: Líder principal, su Quirk "Decay" y su odio hacia los héroes impulsan a la Liga.
+            Kurogiri: Mano derecha de Shigaraki, con el Quirk "Warp Gate" que permite teleportarse y teleportar a otros.
+            Dabi: Con un poderoso Quirk de fuego, sus motivaciones y conexiones familiares se revelan progresivamente.
+            Himiko Toga: Puede transformarse en otras personas bebiendo su sangre, motivada por una obsesión con el amor y la sangre.
+            Twice: Capaz de duplicar cualquier cosa, incluidos seres humanos, su lealtad y conflictos internos son cruciales para la Liga.
+            Spinner: Admirador de Stain, lucha por los ideales de un mundo donde los héroes no sean corruptos.
+        </p><p> En resumen, la Liga de Villanos es una organización que evoluciona constantemente, adaptándose y creciendo en respuesta a sus fracasos y victorias. Su impacto en el mundo de "My Hero Academia" es profundo, desafiando las normas establecidas y representando una amenaza persistente para los héroes y la sociedad en general.
+            </p>
+        <img src="https://i.ytimg.com/vi/0vBhQwZ4VrA/maxresdefault.jpg" alt="Villanos de My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="arcos" class="content">
+        <h2>Arcos Narrativos</h2>
+        <p>"My Hero Academia" se desarrolla a través de una serie de arcos narrativos que permiten explorar en profundidad tanto la evolución de los personajes como el desarrollo de la trama. Aquí te presento un resumen detallado de los principales arcos de la serie:
+        </p><p>Arco del Examen de Admisión (Capítulos 1-4, Episodios 1-4)
+            Resumen: Izuku Midoriya, un joven sin Quirk, sueña con convertirse en un héroe como su ídolo All Might. Tras un encuentro fortuito con All Might y mostrar un valor excepcional, Midoriya es elegido como sucesor del Quirk "One For All". Con este poder, se presenta al examen de admisión de la Academia UA.
+            Momentos Clave: La primera aparición de All Might, Midoriya demostrando su coraje en el examen, y la admisión de Midoriya a la UA.
+        </p><p> Arco del Comienzo de la Escuela (Capítulos 5-21, Episodios 5-13)
+            Resumen: Los nuevos estudiantes de la UA comienzan sus clases y entrenamiento. Midoriya y sus compañeros de la Clase 1-A se familiarizan con sus poderes y con el sistema educativo de la UA.
+            Momentos Clave: La evaluación de Quirks, el entrenamiento de combate en parejas, y el primer enfrentamiento entre Midoriya y Bakugo.
+        </p><p>Arco del Asalto al USJ (Capítulos 22-44, Episodios 13-21)
+            Resumen: La Liga de Villanos ataca el USJ (Unforeseen Simulation Joint) con la intención de eliminar a All Might y sembrar caos. Los estudiantes de la Clase 1-A deben defenderse y sobrevivir hasta la llegada de los héroes profesionales.
+            Momentos Clave: La batalla entre los estudiantes y los villanos, la aparición de Nomu, y la intervención de All Might para salvar a sus estudiantes.
+        </p><p>Arco del Festival Deportivo (Capítulos 45-69, Episodios 22-33)
+            Resumen: La UA organiza su Festival Deportivo anual, donde los estudiantes compiten en diversas pruebas para demostrar sus habilidades. Este evento es una oportunidad crucial para que los héroes en entrenamiento llamen la atención de las agencias de héroes.
+            Momentos Clave: La carrera de obstáculos, la batalla de caballería, y el torneo de combates uno a uno, destacando el enfrentamiento entre Midoriya y Todoroki.
+        </p><p> Arco del Internado con Héroes (Capítulos 70-96, Episodios 34-38)
+            Resumen: Los estudiantes de la UA participan en un internado con héroes profesionales. Midoriya entrena bajo la supervisión de Gran Torino y se enfrenta a nuevos villanos como Stain, el "Hero Killer".
+            Momentos Clave: El entrenamiento intensivo de Midoriya, el enfrentamiento con Stain, y la unión de Iida, Todoroki y Midoriya para derrotar a Stain.
+        </p><p>Arco del Examen Final (Capítulos 97-121, Episodios 39-45)
+            Resumen: Los estudiantes de la Clase 1-A deben pasar un examen final que incluye pruebas prácticas y teóricas. En la prueba práctica, los estudiantes enfrentan a sus propios profesores en simulaciones de combate.
+            Momentos Clave: La colaboración entre Midoriya y Bakugo para enfrentar a All Might, y el desarrollo de estrategias de equipo entre los estudiantes.
+        </p><p> Arco del Campamento de Entrenamiento en el Bosque (Capítulos 122-163, Episodios 46-50)
+            Resumen: La Clase 1-A participa en un campamento de entrenamiento intensivo en el bosque para mejorar sus habilidades. La Liga de Villanos ataca el campamento, secuestrando a Bakugo.
+            Momentos Clave: La invasión de la Liga de Villanos, el enfrentamiento entre los estudiantes y los villanos, y el secuestro de Bakugo.
+        </p><p> Arco de la Misión de Rescate de Bakugo (Capítulos 164-190, Episodios 51-58)
+            Resumen: Los héroes profesionales y un grupo selecto de estudiantes de la UA planifican y ejecutan una misión de rescate para salvar a Bakugo de la Liga de Villanos.
+            Momentos Clave: La confrontación con All For One, la liberación de Bakugo, y la última batalla de All Might contra All For One, culminando en el retiro de All Might.
+        </p><p>Arco del Examen de Licencia Provisional (Capítulos 191-217, Episodios 59-63)
+            Resumen: Los estudiantes de la UA participan en el examen de licencia provisional de héroe, enfrentando diversas pruebas y combates para obtener sus licencias temporales.
+            Momentos Clave: La colaboración y competencia entre los estudiantes, el enfrentamiento con otros estudiantes de diferentes escuelas, y Midoriya desarrollando su nuevo estilo de combate, "Shoot Style".
+        </p><p>Arco de la Agencia de Nighteye (Capítulos 218-240, Episodios 64-66, 69-76)
+            Resumen: Midoriya realiza una pasantía en la agencia de Sir Nighteye, el antiguo compañero de All Might. Los héroes investigan y enfrentan al Shie Hassaikai, una organización yakuza liderada por Overhaul.
+            Momentos Clave: La misión de rescate de Eri, la batalla contra Overhaul, y el sacrificio de Sir Nighteye.
+        </p><p>Arco del Festival Cultural (Capítulos 241-262, Episodios 67-68, 77-79)
+            Resumen: La UA organiza un festival cultural, y los estudiantes de la Clase 1-A planean una presentación para levantar el ánimo de los demás. Mientras tanto, el villano Gentle Criminal planea infiltrarse en el festival.
+            Momentos Clave: El enfrentamiento entre Midoriya y Gentle Criminal, y la exitosa presentación de la Clase 1-A.
+        </p><p> Arco de la Guerra de Liberación Paranormal (Capítulos 263-306, Episodios 100-112)
+            Resumen: El Frente de Liberación Paranormal, formado por la fusión de la Liga de Villanos y el Ejército de Liberación Meta, lanza una ofensiva masiva contra los héroes y la sociedad.
+            Momentos Clave: Las batallas épicas entre héroes y villanos, la transformación de Shigaraki, y las devastadoras consecuencias de la guerra.
+        </p><p>Arco de la Guerra Final (Capítulos 307 en adelante, episodios en curso)
+            Resumen: La batalla final entre los héroes y la Liga de Villanos se desata. Los estudiantes de la UA y los héroes profesionales unen fuerzas para enfrentar la mayor amenaza hasta ahora.
+            Momentos Clave: La culminación de las historias de los personajes principales, las resoluciones de conflictos pendientes, y el desenlace de la lucha entre el bien y el mal.</p>
+        <img src="https://voicefilm.com/wp-content/uploads/2022/02/My-Hero-Academia-The-Complete-Watch-Order-00-1024x536.jpg" alt="Arcos Narrativos de My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="anime" class="content">
+        <h2>Anime</h2>
+        <p>Academia de mi héroe (僕ぼくのヒーローアカデミア Boku no Hīrō Akademia?) es una serie de anime producida por Toho y Bones basada en el manga de Kohei Horikoshi. Fue anunciado en el número 49 de 2015 de Weekly Shonen Jump. El 8 de marzo de 2016, Funimation anunció que había adquirido los derechos internacionales exclusivos de la serie. MBS coprodujo la primera temporada.</p>
+    <p> Cine</p><p>
+        Ha habido cuatro películas hasta ahora en la serie:
+    </p><p>
+      My Hero Academia: Dos héroes (2018)</p>
+    <p> My Hero Academia: Héroes: Ascenso (2019)</p>
+<p> My Hero Academia: La misión de los héroes del mundo (2021)</p>
+<p> My Hero Academia: You're Next (2024)</p>
+<p> OVA
+</p><p>  Ha habido seis OVAs hasta ahora en la serie:
+</p>
+<p> ¡Salvar! Entrenamiento de Rescate (2016)</p>
+<p>  El entrenamiento de los muertos (2017)</p>
+<p>¡Hazlo! Entrenamiento de supervivencia a vida o muerte (2020)</p>
+<p>  Liga de Héroes de Béisbol (2022)</p>
+<p> ¡Risa! Como si estuvieras en el infierno (2022)</p>
+<p>    Batalla de héroes de U.A. (2023)</p>
+<p>    OVA de la película</p>
+<p>    Ha habido dos OVAs hechas como tie-ins de películas:</p>
+<p>
+        All Might Rising (2019)</p>
+    <p> Salida (2022)</p>
+        <img src="https://www.impericon.com/media/catalog/product/m/y/myheroacademia_heroes_accessorie_poster_abydco476_art20-003929_3700789266914_414535-649_lg.jpg" alt="Anime de My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="manga" class="content">
+        <h2>Manga</h2>
+        <p>
+            Historia</p><p>
+Antes de que la serie se publicara en Weekly Shonen Jump, Kohei Horikoshi probó las ideas de My Hero Academia en un One-Shot llamado "My Hero" que se publicó en Akamaru Jump en el invierno de 2008.
+
+Después de haber creado dos series en Weekly Shonen Jump que finalmente fueron canceladas, Oumagadoki Zoo, que duró cinco volúmenes entre 2010 y 2011, y Barrage, que duró dos volúmenes en 2012, Horikoshi sintió que se había quedado sin ideas. Cuando se le dio la oportunidad de una tercera temporada, decidió volver a visitar el viejo one-shot de "My Hero", que se convirtió en la inspiración para la serie. Otras inspiraciones serían las películas y cómics estadounidenses, como Star Wars, Spider-Man y X-Men, así como el manga shonen como Naruto, Dragon Ball, Ultraman y Kamen Rider.
+
+El desarrollo de la serie comenzó en junio de 2013 antes de que su primer capítulo se lanzara oficialmente un año después, en julio de 2014.
+</p><p>
+El 26 de enero de 2015, Viz Media anunció que a partir del 9 de febrero de 2015 de ese año, traducirían oficialmente la serie al inglés para su lanzamiento en la Viz Shonen Jump.
+</p><p>
+El 7 de agosto de 2018, My Hero Academia había vendido más de 16 millones de copias.
+</p><p>
+El 4 de diciembre de 2018 trajo otra reimpresión de los volúmenes 1-20 que puso en circulación alrededor de 18 millones de copias más. [1]
+</p><p>
+Para el 6 de diciembre de 2019, la serie tenía un acumulado de 26 millones de copias en circulación. [2]
+</p><p>
+En enero de 2022, la serie ha alcanzado más de 65 millones de copias en circulación en todo el mundo.
+</p><p>
+Conspirar</p><p>
+Artículo principal: Arcos argumentales
+Las personas no nacen iguales, una comprensión a la que se enfrentó Izuku Midoriya, de cuatro años, cuando fue intimidado por sus compañeros de clase que tenían poderes especiales únicos. Izuku fue uno de los raros casos en los que nació sin ningún poder único. Esto no impidió que Izuku persiguiera su sueño, un sueño de convertirse en un gran héroe como el legendario All Might. Para convertirse en el gran héroe que irremediablemente quiere ser, ahora se unirá a las filas de una de las "Academias de Héroes" mejor calificadas del país: U.A. High School. Con la ayuda de su ídolo All Might, ¿podrá reclamar los rangos y convertirse en un verdadero héroe?
+</p><p>
+Estilo</p><p>
+El manga toma varias señales y estilos de los cómics estadounidenses. También rompe con la idea del cliché del protagonista principal del manga de batalla, que normalmente es muy poderoso y salvaje desde el principio.
+
+        </p>
+        <img src="https://ih1.redbubble.net/image.1075049083.1004/pad,750x1000,f8f8f8.u1.jpg" alt="Manga de My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div id="merchandising" class="content">
+        <h2>Mercancia</h2>
+        <p>My Hero Academia ha inspirado una amplia gama de productos, desde figuras de acción hasta videojuegos y ropa, permitiendo a los fans mostrar su amor por la serie de diversas maneras.</p>
+        <img src="https://m.media-amazon.com/images/I/61sl+t8kXWL.jpg" alt="Merchandising de My Hero Academia">
+        <img src="https://ae01.alicdn.com/kf/H3545f4ca8f7f428f9a4f0bcd7fbc4e60C.jpg" alt="Merchandising de My Hero Academia">
+        <img src="https://i.pinimg.com/736x/27/97/33/279733b4a21cccc66530587dce1ef446.jpg" alt="Merchandising de My Hero Academia">
+        <img src="https://i.etsystatic.com/19830412/r/il/0992aa/2160374766/il_500x500.2160374766_cjvc.jpg" alt="Merchandising de My Hero Academia">
+        <a class="btn" onclick="showSection('home')">Volver al inicio</a>
+    </div>
+
+    <div class="footer">
+        <p>My Hero Academia Fansite</p>
+    </div>
+</body>
+</html>
